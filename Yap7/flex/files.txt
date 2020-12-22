@@ -1,9 +1,9 @@
-имя1:pass1
-имя1:pass1
-имя1:pass1
+name1:pass1
+name2:pass1
+name1:pass1
 admin:pass1
-имя1:pass1
+name1:pass1
 admin:pass1
-имя1:pass1
+name1:pass1
 imya:pass2
 admin:pass2

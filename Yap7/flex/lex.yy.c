@@ -470,11 +470,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "Yap7.c"
-#line 3 "Yap7.c"
- #include <stdio.h>
+#line 1 "yap7.c"
+#line 3 "yap7.c"
 int lines = 0;
 int admin = 0;
+
 #line 478 "lex.yy.c"
 #line 479 "lex.yy.c"
 
@@ -693,7 +693,7 @@ YY_DECL
 		}
 
 	{
-#line 7 "Yap7.c"
+#line 7 "yap7.c"
 
 #line 698 "lex.yy.c"
 
@@ -765,20 +765,24 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 8 "Yap7.c"
-{lines++;}
+#line 8 "yap7.c"
+{
+lines++;
+}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "Yap7.c"
-{admin++;}
+#line 11 "yap7.c"
+{
+admin++;
+}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "Yap7.c"
+#line 14 "yap7.c"
 ECHO;
 	YY_BREAK
-#line 781 "lex.yy.c"
+#line 785 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1795,14 +1799,18 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 10 "Yap7.c"
+#line 14 "yap7.c"
+
+ #include <stdio.h>
+ #include <stdlib.h>
 
 int main(int argc, char **argv)
 {
-  yyin = fopen(argv[1], "r");
+ yyin = fopen(argv[1], "r");
  yylex();
  int sum = admin/lines*100;
  printf("\nAdmin: %8d | Lines: %8d\n sum:%.6f Percent",admin,lines,(float)admin/lines*100);
+ fclose(yyin);
  return 0;
 }
 

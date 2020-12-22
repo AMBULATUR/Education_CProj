@@ -25,8 +25,6 @@ enum Signals table[5][3] = {
 	[state2][quote] = state3,
 	[state2][symbol] = state5,
 
-	//[state3][quote] = state3, //end
-
 	[state3][quote] = state4,
 
 	[state4][quote] = state3,
@@ -59,10 +57,10 @@ void CheckString(const char* str)
 		for (int j = i; j < strlen(str); ++j) {
 			state = table[state][GetCharTypeState(str[j])];
 
-			if (state == state1) {//Multi line
+			if (state == state1) {//Multi line new word
 				if (substr[0] != '\0' /*&& substr[1] != '\''*/)
 				{
-					//printf("%s\n", substr);
+					printf("%s\n", substr);
 					i = j - 1;
 				}
 				break;
@@ -90,21 +88,19 @@ int main()
 		// Примеры корректных строк:	
 		// 'Hello, world!'
 		// 'I don''t know.'
-
-
+	
 	//Примеры из докумнта:
-	CheckString("'Hello, world!'");			//TRUE
-	CheckString("'I don''t know.'");			//TRUE
-	//END
+	//"'' 'asdasd'' blabla'bla'bla ''''"
 
-	//Вольные примеры, Quote экранирован.
-	CheckString("'hello world'");			// Quote Слева, Quote справа	TRUE
-	CheckString("\'hello \'\'world\'");		// Quote в начале, double quote в середине, Quote в конце	TRUE
 
-	CheckString("quote");					// Без Quote					FALSE
-	CheckString("\'quote");					// Quote первым символом		FALSE
-	CheckString("quote\'");					// Quote в конце				FALSE
-	CheckString("\'quote\'");				// Quote с двух сторон			TRUE
+	CheckString("'asdasd' '");			//TRUE
 
+											
+											
+											
+											
+											//END
+
+	
 }
 

@@ -136,63 +136,60 @@ node* search(node* root, int key)
 	}
 }
 
-int searchInDeep(node* root, int key)
+int min(x, z, y)
 {
-	int length = 0;
-	list_t* st = create_list();
-	list_push(st, root);
-	//Длинна пути от root к искомому элементу 
-
-	while (st->size != 0)
-	{
-		node* nodez = st->head->data;
-		if (nodez->left != NULL)
-		{
-			if (nodez->left->key == key)
-				length = length + 2;
-		}
-
-		if (nodez->middle != NULL)
-		{
-			if (nodez->middle->key == key)
-				length = length + 2;
-		}
-
-		if (nodez->right != NULL)
-		{
-			if (nodez->right->key == key)
-				length = length + 2;
-		}
-
-		if (nodez->isVisited != 1)
-		{
-			nodez->isVisited = 1;
-		}
-		if (nodez->left != NULL && nodez->left->isVisited == 0)
-		{
-			length--; // not found
-			list_push(st, nodez->left);
-			continue;
-		}
-		if (nodez->middle != NULL && nodez->middle->isVisited == 0)
-		{
-			length--;
-			list_push(st, nodez->middle);
-			continue;
-		}
-		if (nodez->right != NULL && nodez->right->isVisited == 0)
-		{
-			length--;
-			list_push(st, nodez->right);
-			continue;
-		}
-		length++;
-		node* obrabot = (node*)list_pop(st); // Возвращаемся в прошлую ноду
-		int jk = 0;
-	}
-	return length;
-
+	if (x < y)
+		return x;
+	else if (x > y)
+		return y;
+	else
+		return z;
 }
+
+int searchInDeep(node* root, int element, int i)
+{
+	int FoundInL = NULL; // Found in Left child
+	int FoundInM = NULL;
+	int FoundInR = NULL;
+	if (root->key == element) // if Find return level+1
+	{
+		return i + 1;
+	}
+	else
+	{
+		FoundInL = -1;
+		if (root->left != NULL)
+		{
+			FoundInL = searchInDeep(root->left, element, i + 1);
+		}
+		FoundInM = -1;
+		if (root->middle != NULL)
+		{
+			FoundInM = searchInDeep(root->middle, element, i + 1);
+		}
+		FoundInR = -1;
+		if (root->right != NULL)
+		{
+			FoundInR = searchInDeep(root->right, element, i + 1);
+		}
+		if (FoundInL == -1) // esli net v L
+		{
+			return FoundInR;
+		}
+		else if (FoundInR == -1)
+		{
+			return FoundInL;
+		}
+		else
+		{
+			return min(FoundInL, FoundInM, FoundInR);
+		}
+
+	}
+}
+
+
+
 
 int tree()
 {
@@ -226,11 +223,9 @@ int tree()
 	add(derevo, 2);
 	add(derevo, 3);
 
-	length = searchInDeep(derevo, 2);
+	length = searchInDeep(derevo, -2, -1);
 
-	//length = 0;
-
-	printf("%d",length);
+	printf("%d", length);
 	return 0;
 }
 
